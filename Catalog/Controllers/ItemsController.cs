@@ -36,7 +36,6 @@ namespace Catalog.Controllers
                 return NotFound();
             }
 
-
             return item.AsDto();
         }
 
@@ -49,10 +48,49 @@ namespace Catalog.Controllers
                 Price = itemDto.Price,
                 CreatedDate = DateTimeOffset.UtcNow
             };
-
+            if(item is null){
+                return BadRequest();
+            }
             repository.CreateItem(item);
 
             return CreatedAtAction(nameof(GetItem), new {id = item.Id}, item.AsDto());
+        }
+        // PUT /items/{id}
+        [HttpPut("{id}")]
+        public ActionResult UpdateItem(Guid id, UpdateItemDto itemDto) 
+        {
+            var existingItem = repository.GetItem(id);
+
+            if(existingItem is null) {
+                return NotFound();
+            }
+
+            Item updatedItem = existingItem with 
+            {
+                Name = itemDto.Name,
+                Price = itemDto.Price
+            };
+
+            repository.UpdateItem(updatedItem);
+
+            return NoContent();
+            
+        }
+
+        //DEL items/{id}
+        [HttpDelete("{id}")]
+
+        public ActionResult DeleteItem(Guid id)
+        {
+            var existingItem = repository.GetItem(id);
+
+            if(existingItem is null) {
+                return NotFound();
+            }
+
+            repository.DeleteItem(id);
+
+            return NoContent();
         }
     }
 }

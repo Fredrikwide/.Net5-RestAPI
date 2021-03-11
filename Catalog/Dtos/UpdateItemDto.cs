@@ -1,12 +1,11 @@
 using System.ComponentModel.DataAnnotations;
-
 namespace Catalog.Dtos
 {
-    public class CreateItemDto 
+    public record UpdateItemDto 
     {
-      [Required]
+      [RequiredAttribute]
       public string Name { get; init; }
-      [Required]
+      [RequiredAttribute]
       [Range(1, 9999)]
       public decimal Price { get; init; }
     }

@@ -2,7 +2,7 @@ using System;
 
 namespace Catalog.Dtos
 {
-    public record ItemDto
+    public class ItemDto
     {
         public Guid Id {get; init;}
         public string Name {get; init;}
