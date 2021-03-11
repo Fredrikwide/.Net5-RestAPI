@@ -52,7 +52,7 @@ namespace Catalog.Controllers
 
             repository.CreateItem(item);
 
-            return CreatedAtAction(nameof(GetItem), new {id = item.Id}, item.AsDto())
+            return CreatedAtAction(nameof(GetItem), new {id = item.Id}, item.AsDto());
         }
     }
 }
