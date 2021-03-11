@@ -25,7 +25,7 @@ namespace Catalog.Repositories
     {
       return items;
     }
-
+    
     public Item GetItem(Guid id)
     {
       return items.SingleOrDefault(item => item.Id == id);
